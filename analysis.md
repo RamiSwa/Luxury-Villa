@@ -10,18 +10,21 @@
     - description
     - place- location * 
     - category we will add *
-    - room-features
+    - villa-features
 
 property-details.html
     - without rating we add rating: *
             - room show rating
             - add rate [booked]
             - villa avg rating
+
     - Description
 
     - with out booking we add this, book: *
                                     - book 
                                     - check availability
+
+
     table:
         - overview
         - description
