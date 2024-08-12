@@ -38,8 +38,8 @@ class PropertyImages(models.Model):
     # def __str__(self):
     #     return str(self.property)
     
-    def __str__(self) -> str:
-        return super().__str__(self.property)
+    def __str__(self):
+        return str(self.property)
 
 
 
@@ -85,8 +85,8 @@ class PropertyBook(models.Model):
     property = models.ForeignKey(Property, related_name='book_property', on_delete=models.CASCADE)
     date_from = models.DateField(default=timezone.now)
     date_to = models.DateField(default=timezone.now)
-    guest = models.CharField(max_length=2, choices=COUNT)
-    children = models.CharField(max_length=2, choices=COUNT)
+    guest = models.IntegerField(choices=COUNT)
+    children = models.IntegerField(choices=COUNT)
     
     def __str__(self):
         return str(self.property)   

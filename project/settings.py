@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     
     # 3rd library
     'taggit',
+    'django_summernote',
+    "bootstrap5",
+    'django_filters',
     
 ]
 
@@ -131,7 +134,6 @@ STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    "/var/www/static/",
 ]
 
 
