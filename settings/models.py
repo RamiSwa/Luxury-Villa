@@ -12,6 +12,7 @@ class Settings(models.Model):
     ins_link = models.URLField(max_length=200)
     telegram_link = models.URLField(max_length=200)
     property_city = models.CharField(max_length=50)
+    address = models.CharField(max_length=100)
     
     def __str__(self):
         return self.site_name 
