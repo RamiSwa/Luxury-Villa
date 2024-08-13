@@ -1,0 +1,122 @@
+{% extends 'base.html' %} 
+
+{% load static %}
+ {% block body %}
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h2>Blog List</h2>
+                        <div class="breadcrumb-option">
+                            <a href="#"><i class="fa fa-home"></i> Home</a>
+                            <span>Blog Default</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section Begin -->
+
+    <!-- Blog Section Begin -->
+    <section class="blog-section blog-page spad">
+        <div class="container">
+            <div class="row">
+
+
+                
+                {% for post in object_list %}
+ 
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-blog-item">
+                        <div class="sb-pic">
+                       <a href="{{post.get_absolute_url}}"><img src="{{post.image.url}}" alt=""></a>     
+                        </div>
+                        <div class="sb-text">
+                            <ul>
+                                <li><i class="fa fa-user"></i> {{post.author}}</li>
+                                <li><i class="fa fa-clock-o"></i> {{post.created_at|date:'F j Y'}}</li>
+  
+                            </ul>
+                            <h4><a href="{{post.get_absolute_url}}">{{post}}</a></h4>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+                    
+                <div class="col-lg-12">
+        <!-- pagination        -->
+
+        {% if is_paginated %}
+        <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <div class="property-pagination">
+                {% if page_obj.has_previous %}
+                <a href="?page={{page_obj.previous_page_number}}">&lt;</a>
+                {% else %}
+                <span class="disibled"></span>
+
+                {% endif %} 
+                {% for i in paginator.page_range %} 
+                {% if page_obj.number == i %}
+                <a href="#" class="active">{{i}}</a>
+                {% else %}
+                <a href="?page={{i}}">{{i}}</a>
+                {% endif %} {% endfor %} {% if page_obj.has_next %}
+                <a href="?page={{page_obj.next_page_number}}">&gt;</a>
+                {% else %}
+                <span class="disibled"></span>
+
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+
+    <!-- Partner Carousel Section Begin -->
+    <div class="partner-section">
+        <div class="container">
+            <div class="partner-carousel owl-carousel">
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="{% static 'img/partner/partner-1.png' %}" alt="">
+                    </div>
+                </a>
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="{% static 'img/partner/partner-2.png' %}" alt="">
+                    </div>
+                </a>
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="{% static 'img/partner/partner-3.png' %}" alt="">
+                    </div>
+                </a>
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="{% static 'img/partner/partner-4.png' %}" alt="">
+                    </div>
+                </a>
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="{% static 'img/partner/partner-5.png' %}" alt="">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Partner Carousel Section End -->
+
+
+    {% endblock body %}
