@@ -63,12 +63,11 @@
         </div>
         <nav class="main-menu">
             <ul>
-                <li><a href="./index.html">Home</a></li>
-                <li><a href="./property.html">Property</a></li>
-                <li><a href="./about-us.html">Agets</a></li>
-                <li><a href="./blog.html">News</a></li>
-                <li><a href="./property-details.html">Pages</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="{% url 'about:about' %}">About</a></li>
+                <li class="active"><a href="{% url 'property:property_list' %}">Property</a></li>
+                <li><a href="{% url 'blog:post_list' %}">Blog</a></li>
+                <li><a href="{% url 'home:contact_us' %}">Contact</a></li>
             </ul>
         </nav>
         <div class="nav-logo-right">
@@ -107,12 +106,12 @@
                     <div class="col-lg-7">
                         <nav class="main-menu">
                             <ul>
-                                <li><a href="./index.html">Home</a></li>
-                                <li class="active"><a href="./property.html">Property</a></li>
-                                <li><a href="./about-us.html">About Us</a></li>
-                                <li><a href="./blog.html">Blog</a></li>
-                                <li><a href="./property-details.html">Pages</a></li>
-                                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="{% url 'about:about' %}">About</a></li>
+                <li class="active"><a href="{% url 'property:property_list' %}">Property</a></li>
+                <li><a href="{% url 'blog:post_list' %}">Blog</a></li>
+                <li><a href="{% url 'home:contact_us' %}">Contact</a></li>
+                         
                             </ul>
                         </nav>
                     </div>

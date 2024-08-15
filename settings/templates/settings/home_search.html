@@ -1,0 +1,172 @@
+{% extends 'base.html' %} 
+{% load bootstrap5 %}
+{% load static %}
+ {% block body %}
+
+<!-- Map Section Begin -->
+<div class="map">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2942.5524090066037!2d-71.10245469994108!3d42.47980730490846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e3748250c43a43%3A0xe1b9879a5e9b6657!2sWinter%20Street%20Public%20Parking%20Lot!5e0!3m2!1sen!2sbd!4v1577299251173!5m2!1sen!2sbd"
+    height="500"
+    style="border: 0"
+    allowfullscreen=""
+  ></iframe>
+  <div class="icon-list">
+    <div class="icon icon-1">1</div>
+    <div class="icon icon-2">2</div>
+    <div class="icon icon-3">3</div>
+    <div class="icon icon-4">4</div>
+    <div class="icon icon-5">5</div>
+  </div>
+</div>
+<!-- Map Section End -->
+
+<!-- Property Section Begin -->
+<section class="property-section spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="property-sidebar">
+
+
+
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <h4 class="property-title">Property</h4>
+        <div class="property-list">
+          {% for property in property_list %}
+
+          <div class="single-property-item">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="property-pic">
+                  <a href="{{property.get_absolute_url}}">
+                    <img src="{{ property.image.url }}" alt="image" />
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="property-text">
+                  <div class="s-text">For Sale</div>
+                  <h5 class="r-title">
+                    <a href="{{property.get_absolute_url}}"
+                      >{{property.name}}</a
+                    >
+                  </h5>
+                  <div class="room-price">
+                    <span>Start From:</span>
+                    <h5>${{property.price}}</h5>
+                  </div>
+                  <div class="properties-location">
+                    <i class="icon_pin"></i> {{property.place}}
+                  </div>
+                  <p>{{property.description|safe|truncatewords:15}}</p>
+                  <ul class="room-features">
+                    <li>
+                      <i class="fa fa-arrows"></i>
+                      <p>5201 sqft</p>
+                    </li>
+                    <li>
+                      <i class="fa fa-bed"></i>
+                      <p>8 Bed Room</p>
+                    </li>
+                    <li>
+                      <i class="fa fa-bath"></i>
+                      <p>7 Baths Bed</p>
+                    </li>
+                    <li>
+                      <i class="fa fa-car"></i>
+                      <p>1 Garage</p>
+                    </li>
+                  </ul>
+
+                  <p class="bottom-area d-flex">
+                    <span class="ml-auto"
+                      ><a href="{{property.get_absolute_url}}"
+                        >Book Now</a
+                      ></span
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+{% empty %}
+<h5>no results</h5>
+          {% endfor %}
+        </div>
+
+
+        <!-- pagination        -->
+
+        {% if is_paginated %}
+        <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <div class="property-pagination">
+                {% if page_obj.has_previous %}
+                <a href="?page={{page_obj.previous_page_number}}">&lt;</a>
+                {% else %}
+                <span class="disibled"></span>
+
+                {% endif %} 
+                {% for i in paginator.page_range %} 
+                {% if page_obj.number == i %}
+                <a href="#" class="active">{{i}}</a>
+                {% else %}
+                <a href="?page={{i}}">{{i}}</a>
+                {% endif %} {% endfor %} {% if page_obj.has_next %}
+                <a href="?page={{page_obj.next_page_number}}">&gt;</a>
+                {% else %}
+                <span class="disibled"></span>
+
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+
+
+    </div>
+  </div>
+</section>
+<!-- Property Section End -->
+
+<!-- Partner Carousel Section Begin -->
+<div class="partner-section">
+  <div class="container">
+    <div class="partner-carousel owl-carousel">
+      <a href="#" class="partner-logo">
+        <div class="partner-logo-tablecell">
+          <img src="{% static 'img/partner/partner-1.png' %}" alt="" />
+        </div>
+      </a>
+      <a href="#" class="partner-logo">
+        <div class="partner-logo-tablecell">
+          <img src="{% static 'img/partner/partner-2.png' %}" alt="" />
+        </div>
+      </a>
+      <a href="#" class="partner-logo">
+        <div class="partner-logo-tablecell">
+          <img src="{% static 'img/partner/partner-3.png' %}" alt="" />
+        </div>
+      </a>
+      <a href="#" class="partner-logo">
+        <div class="partner-logo-tablecell">
+          <img src="{% static 'img/partner/partner-4.png' %}" alt="" />
+        </div>
+      </a>
+      <a href="#" class="partner-logo">
+        <div class="partner-logo-tablecell">
+          <img src="{% static 'img/partner/partner-5.png' %}" alt="" />
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+<!-- Partner Carousel Section End -->
+
+
