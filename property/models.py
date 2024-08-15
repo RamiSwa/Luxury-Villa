@@ -8,6 +8,7 @@ from django.utils.text import slugify
 
 
 class Property(models.Model):
+    owner = models.ForeignKey(User, related_name='property_owner', on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     image = models.ImageField(upload_to='property/') # main image
     price = models.IntegerField(default=0)
@@ -23,12 +24,39 @@ class Property(models.Model):
         super(Property, self).save(*args, **kwargs)
     
     def __str__(self):
-        return  f"Property name: {self.name}"
+        return  self.name
     
     def get_absolute_url(self):
         return reverse("property:property_detail", kwargs={"slug": self.slug})
     
+    
+    def check_availability(self):
+        all_reservations = self.book_property.all()
+        now = timezone.now().date()
         
+        for reservation in all_reservations:
+            if now > reservation.date_to:
+                return 'Available'
+            
+            elif now > reservation.date_from and now < reservation.date_to:
+                reserved_to =  reservation.date_to
+                return f'In progress {reserved_to}'
+        
+        else:
+            return 'Available'
+    
+    def get_avg_rating(self):
+        all_reviews = self.review_property.all()
+        all_rating = 0
+        
+        if len(all_reviews) > 0 :
+            for review in all_reviews:
+                all_rating += review.rate
+                
+            return round(all_rating/len(all_reviews),2)
+        
+        else:
+            return '-'
 
 class PropertyImages(models.Model):
     property = models.ForeignKey(Property, related_name='property_image', on_delete=models.CASCADE)
@@ -91,3 +119,11 @@ class PropertyBook(models.Model):
     
     def __str__(self):
         return str(self.property)   
+    
+    
+    def in_progress(self):
+        now = timezone.now().date()
+        
+        return now > self.date_from and now < self.date_to
+    
+    in_progress.boolean = True

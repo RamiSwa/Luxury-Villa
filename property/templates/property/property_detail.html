@@ -202,21 +202,25 @@
 
 
 
-                    <div class="property-map">
-                        <h4>Map</h4>
-                        <div class="map-inside">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2942.5524090066037!2d-71.10245469994108!3d42.47980730490846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e3748250c43a43%3A0xe1b9879a5e9b6657!2sWinter%20Street%20Public%20Parking%20Lot!5e0!3m2!1sen!2sbd!4v1577299251173!5m2!1sen!2sbd"
-                                height="320" style="border: 0" allowfullscreen=""></iframe>
-                            <div class="icon">
-                                <i class="fa fa-home"></i>
-                            </div>
-                        </div>
-                    </div>
+
 
                 </div>
 
             </div>
+
+
+
+            
+            {% if object.check_availability == 'Available' %}
+            <h4>Available Today</h4>
+
+            {% else %}
+            <h5>The Villa Being Booked, 
+                The reservation {{object.check_availability}}
+            </h5>
+                
+            {% endif %}
+                
             <div class="container">
 
                 <div class="container">
@@ -246,12 +250,12 @@
 
                     <div class="col-md-6">
                         <div class="destination">
-                            <a href="hotel-single.html" class="img img-2"
+                            <a href="{{property.get_absolute_url}}" class="img img-2"
                                 style="background-image: url({{property.image.url}});"></a>
                             <div class="text p-3">
                                 <div class="d-flex">
                                     <div class="one">
-                                        <h3><a href="hotel-single.html">{{property.name}}</a></h3>
+                                        <h3><a href="{{property.get_absolute_url}}">{{property.name}}</a></h3>
                                         <p class="rate">
                                             <i class="icon-star"></i>
                                             <i class="icon-star"></i>

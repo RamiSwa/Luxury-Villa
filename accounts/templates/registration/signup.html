@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load bootstrap5 %}
+{% load static %}
+<!-- Hero Section Begin -->
+<section class="hero-section">
+	<div class="hero-items owl-carousel">
+		<div class="single-hero-item set-bg" data-setbg="{% static 'img/hero/hero-2.jpg' %}">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 offset-lg-2">
+						<div class="hero-text">
+							<h2>Sign Up</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</section>
+<!-- Hero Section End -->
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 mx-auto my-3">
+			<h3> Signup Now</h3>
+			<form method="POST">
+				{% csrf_token %}
+				{% bootstrap_form signup_form %}
+				{% buttons %}
+					<button type="submit" class="btn btn-primary">Submit</button>
+				{% endbuttons %}
+			</form>
+		</div>
+	</div>
+</div>
+
+
+{% endblock body %}
