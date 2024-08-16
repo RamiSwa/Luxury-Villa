@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['tdjluxury-a5328f1501f4.herokuapp.com', '127.0.0.1' ]
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,7 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     ## my apps
-    'accounts',
+
+    'allauth',
+    'allauth.account',
+    'dj_rest_auth.registration',    
+    
     'blog',
     'property',
     'about',
@@ -52,7 +57,15 @@ INSTALLED_APPS = [
     "bootstrap5",
     'django_filters',
     
+    'rest_framework',
+    'rest_framework.authtoken',
+    'dj_rest_auth',
+    'django.contrib.sites',
+
 ]
+
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -63,6 +76,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'project.urls'
