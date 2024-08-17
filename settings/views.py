@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from property.models import Property, Place, Category
+from .models import Settings
 from django.db.models import Q, Count
+from django.core.mail import send_mail
+from django.conf import settings
+from .tasks import send_mail_task
 
 # Create your views here.
 
@@ -43,4 +47,16 @@ def category_filter(request, category):
 
 
 def contact_us(request):
-    pass
+    site_info = Settings.objects.last()
+
+    if request.method == 'POST':
+        subject = request.POST['subject']
+        name = request.POST['name']
+        email = request.POST['email']
+        message = request.POST['message']
+
+
+        send_mail_task.delay(subject , name,email,message)
+
+
+    return render(request,'settings/contact.html',{'site_info': Settings})

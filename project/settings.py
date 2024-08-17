@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-1qj_@snmi+en_ya0!@8qse940x!2$8z0s!l0j00bxnsu(i**+9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tdjluxury-a5328f1501f4.herokuapp.com', '127.0.0.1' ]
+ALLOWED_HOSTS = ['tdjluxury-a5328f1501f4.herokuapp.com', '127.0.0.1', 'localhost' ]
 
 
 # Application definition
@@ -150,6 +150,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
@@ -174,3 +175,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = '	inforamireviews@gmail.com'
+EMAIL_HOST_PASSWORD = 'bzwknjyjodjkypad'
+EMAIL_USE_TLS = True
+EMAIL_PORT = '587'
+
+# CELERY STUFF
+# BROKER_URL = 'amqp://guest:guest@localhost:5672/'
+BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = TIME_ZONE
