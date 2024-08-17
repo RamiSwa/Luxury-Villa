@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load bootstrap5 %}
+{% load static %}
+<!-- Hero Section Begin -->
+<section class="hero-section">
+    <div class="hero-items owl-carousel">
+        <div class="single-hero-item set-bg" data-setbg="{% static 'img/hero/hero-1.jpg' %}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+                        <div class="hero-text">
+                            <h2>Dashboard</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- Hero Section End -->
+<section class="ftco-section contact-section ftco-degree-bg">
+    <div class="container">
+        <div class="row mb-5 contact-info">
+            <div class="col-md-6">
+                <canvas id="myChart"></canvas>
+            </div>
+            <div class="col-md-6">
+                <canvas id="myChart2"></canvas>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Posts', 'Apartment', 'Villa', 'suite', 'Book', 'User'],
+            datasets: [{
+                label: 'Count',
+                data: [{
+                    {
+                        posts_count
+                    }
+                }, {
+                    {
+                        apartments_count
+                    }
+                }, {
+                    {
+                        villa_count
+                    }
+                }, {
+                    {
+                        suits_count
+                    }
+                }, {
+                    {
+                        booking_count
+                    }
+                }, {
+                    {
+                        users_count
+                    }
+                }],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    var ctx2 = document.getElementById('myChart2').getContext('2d');
+    new Chart(ctx2, {
+        type: 'pie',
+        data: {
+            labels: ['Posts', 'Apartment', 'Villa', 'suite', 'Book', 'User'],
+            datasets: [{
+                label: 'Count Dataset',
+                data: [{
+                    {
+                        posts_count
+                    }
+                }, {
+                    {
+                        apartments_count
+                    }
+                }, {
+                    {
+                        villa_count
+                    }
+                }, {
+                    {
+                        suits_count
+                    }
+                }, {
+                    {
+                        booking_count
+                    }
+                }, {
+                    {
+                        users_count
+                    }
+                }],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+
+                ],
+                hoverOffset: 4,
+            }]
+        }
+    })
+</script>
+{% endblock body %}

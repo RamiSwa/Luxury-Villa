@@ -5,6 +5,9 @@ from django.db.models import Q, Count
 from django.core.mail import send_mail
 from django.conf import settings
 from .tasks import send_mail_task
+from django.contrib.auth.models import User
+from property import models as property_models
+from blog import models as blog_models
 
 # Create your views here.
 
@@ -60,3 +63,22 @@ def contact_us(request):
 
 
     return render(request,'settings/contact.html',{'site_info': Settings})
+
+
+
+def dashboard(request):
+    users_count = User.objects.all().count()
+    apartments_count = property_models.Property.objects.filter(category__name='Apartment').count()
+    villa_count = property_models.Property.objects.filter(category__name='Villa').count()
+    suits_count = property_models.Property.objects.filter(category__name='suite').count()
+    posts = blog_models.Post.objects.all().count()
+    booking = property_models.PropertyBook.objects.all().count()
+    
+    return render(request, 'settings/dashboard.html', {
+        'users_count' : users_count , 
+        'apartments_count': apartments_count , 
+        'villa_count' : villa_count  , 
+        'suits_count' : suits_count ,  
+        'posts_count' : posts , 
+        'booking_count' : booking
+    })
