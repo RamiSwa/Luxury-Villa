@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from property.models import Property, Place, Category
-from .models import Settings
+from .models import Settings, NewsLetter
 from django.db.models import Q, Count
 from django.core.mail import send_mail
 from django.conf import settings
@@ -8,6 +8,7 @@ from .tasks import send_mail_task
 from django.contrib.auth.models import User
 from property import models as property_models
 from blog import models as blog_models
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -82,3 +83,45 @@ def dashboard(request):
         'posts_count' : posts , 
         'booking_count' : booking
     })
+    
+    
+
+# def news_letter_subscribe(request):
+#     email = request.POST.get('emailInput')
+#     NewsLetter.objects.create(email=email)
+#     return JsonResponse({'done':'done'})
+    
+    
+# from django.http import JsonResponse
+# from django.shortcuts import render
+
+# from .models import NewsLetter  # Assuming you have a NewsLetter model in your app
+
+def news_letter_subscribe(request):
+    if request.method == 'POST':
+        email = request.POST.get('emailInput')
+
+        # Validate the email address format
+        if not email or not validate_email(email):  # Implement email validation logic
+            return JsonResponse({'error': 'Invalid email address provided.'}, status=400)
+
+        try:
+            # Check if the email already exists in the database
+            if NewsLetter.objects.filter(email=email).exists():
+                return JsonResponse({'error': 'Email address already subscribed.'}, status=409)
+
+            # Create the new subscription
+            NewsLetter.objects.create(email=email)
+            return JsonResponse({'message': 'You are now subscribed to our newsletter!'})
+        except Exception as e:  # Catch generic exceptions for unexpected errors
+            return JsonResponse({'error': f'An error occurred: {str(e)}'}, status=500)
+
+    else:
+        # Handle non-POST requests (optional)
+        return render(request, 'your_template.html')  # Replace with your template name
+
+# Function to validate email address (replace with your preferred validation method)
+def validate_email(email):
+    import re
+    email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+    return bool(re.match(email_regex, email))
