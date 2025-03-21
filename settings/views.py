@@ -42,5 +42,12 @@ def category_filter(request, category):
     return render(request, 'settings/home_search.html' , {'property_list': property_list} )
 
 
+from django.shortcuts import render
+
 def contact_us(request):
-    pass
+    if request.method == 'POST':
+        # handle form data (optional)
+        pass
+
+    # always return something
+    return render(request, 'contact.html')
