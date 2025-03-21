@@ -50,4 +50,4 @@ def contact_us(request):
         pass
 
     # always return something
-    return render(request, 'contact.html')
+    return render(request, 'settings/contact.html')
